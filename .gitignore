@@ -1,2 +1,6 @@
 build/
+build-*/
 *.kdev4
+.project
+.cproject
+.settings/
