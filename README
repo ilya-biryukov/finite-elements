@@ -1,6 +1,6 @@
 For now we're concerned about matrices, vectors and operations 
   on them.
-We use C++11, so a decent compiler is needed to compile this project. 
+We use C++11, so a decent compiler is needed to compile this project. (We use gcc 4.6.1)
 We also use CMake.
 
 Everything we do is in fe namespace (short for finite_elements)
