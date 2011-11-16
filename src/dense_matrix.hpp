@@ -17,6 +17,7 @@ class dense_matrix {
     typedef Scalar & reference_t;
     typedef Scalar const & const_reference_t;
 
+    dense_matrix() = delete;
     dense_matrix(size_t dim1, size_t dim2)
         : dim1_(dim1), dim2_(dim2), data_(dim1 * dim2) {
     }

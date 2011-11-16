@@ -43,7 +43,7 @@ class dense_vector : public dense_matrix<Scalar, Storage> {
     }
 
     const_reference_t operator () (size_t i) const {
-      return *(const_cast<dense_vector *>(this))(i);
+      return (*const_cast<dense_vector *>(this))(i);
     }
 
     size_t dim() const {
