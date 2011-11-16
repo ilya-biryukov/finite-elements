@@ -1,0 +1,29 @@
+For now we're concerned about matrices, vectors and operations 
+  on them.
+We use C++11, so a decent compiler is needed to compile this project. 
+We also use CMake.
+
+Everything we do is in fe namespace (short for finite_elements)
+Linear algebra stuff is in fe::la namespace (short for linear algebra, as you'd expect)
+
+First part of our hometask is doing linear algebra:  
+  Template parameters to all matrix classes are Scalar and Storage, being
+    the type of numbers that the matrix stores and an stl vector-compatible container
+    that is used to store the data.
+  
+  All matrix and vector classes have data() member, which gives direct access to the underlying
+    storage. E.g., this is useful for filling the data with some random values.
+  
+  Operator () is overridden to support accessing matrix or vector elements by index.
+  
+  There is one class that represents a dense matrix(all elements of the matrix are stored): dense_matrix.
+  
+  And there are a bunch of classes representing sparse matrices: compressed_row_matrix, band_matrix, rowprof_matrix.
+  
+  There is only one class for representing vectors: dense_vector. It's inherited from dense_matrix and as it's just
+    a special case of it.
+  
+  We can do compound assignments on matrices and vectors with overloaded operators +=, -=.
+  Dense matrix product is done by mprod function.
+  Matrix by vector and vector by matrix product is done by mvprod function.
+  Sparse matrix by matrix product is not supported, as it's not required as a part of the hometask.
