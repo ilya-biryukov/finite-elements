@@ -109,9 +109,14 @@ dense_matrix<Scalar, Storage> mprod(dense_matrix<Scalar, Storage> const & lhs,
 }
 
 namespace details {
-template<class Scalar, class Storage>
-void mprod_inplace(dense_matrix<Scalar, Storage> const & lhs,
-    dense_matrix<Scalar, Storage> const & rhs, dense_matrix<Scalar, Storage> & res) {
+template<
+    template<class, class> class Mat1
+    ,template<class, class> class Mat2
+    ,template<class, class> class Mat3
+    ,class Scalar
+    ,class Storage>
+void mprod_inplace(Mat1<Scalar, Storage> const & lhs,
+    Mat2<Scalar, Storage> const & rhs, Mat3<Scalar, Storage> & res) {
   assert(lhs.dim2() == rhs.dim1());
   assert(res.dim1() == lhs.dim1());
   assert(res.dim2() == rhs.dim2());
@@ -131,8 +136,8 @@ void mprod_inplace(dense_matrix<Scalar, Storage> const & lhs,
 } // namespace details
 
 
-typedef dense_matrix<double, std::vector<double>> real_dmatrix;
-typedef dense_matrix<std::complex<double>, std::vector<std::complex<double>>> complex_dmatrix;
+typedef dense_matrix<double, std::vector<double>> dense_matrix_real;
+typedef dense_matrix<std::complex<double>, std::vector<std::complex<double>>> dense_matrix_complex;
 
 } } // namespace fe::la
 

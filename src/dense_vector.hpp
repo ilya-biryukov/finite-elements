@@ -51,25 +51,27 @@ class dense_vector : public dense_matrix<Scalar, Storage> {
     }
 };
 
-typedef dense_vector<double, std::vector<double>> real_dvector;
+typedef dense_vector<double, std::vector<double>> dense_vector_real;
 typedef dense_vector<
     std::complex<double>, std::vector<std::complex<double>>>
-  complex_dvector;
+  dense_vector_complex;
 
 // Multiply matrix by column vector
 template<class Scalar, class Storage>
-dense_vector<Scalar, Storage> mvprod(dense_matrix<Scalar, Storage> const & lhs, dense_vector<Scalar, Storage> const & rhs) {
-  assert(lhs.dim2() == rhs.dim1());
+struct mvprod_f {
+  dense_vector<Scalar, Storage> mvprod(dense_matrix<Scalar, Storage> const & lhs, dense_vector<Scalar, Storage> const & rhs) {
+    assert(lhs.dim2() == rhs.dim1());
 
-  typedef dense_vector<Scalar, Storage> vec;
-  typedef dense_matrix<Scalar, Storage> mat;
+    typedef dense_vector<Scalar, Storage> vec;
+    typedef dense_matrix<Scalar, Storage> mat;
 
-  vec res{lhs.dim1()};
+    vec res{lhs.dim1()};
 
-  details::mprod_inplace(lhs, rhs, res);
+    details::mprod_inplace(lhs, rhs, res);
 
-  return res;
-}
+    return res;
+  }
+};
 
 // Multiply row vector by matrix
 template<class Scalar, class Storage>
