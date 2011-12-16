@@ -90,25 +90,6 @@ class dense_matrix {
 };
 
 namespace details {
-template<class Scalar, class Storage>
-void mprod_inplace(dense_matrix<Scalar, Storage> const & lhs,
-    dense_matrix<Scalar, Storage> const & rhs, dense_matrix<Scalar, Storage> & res);
-} // namespace::details;
-
-template<class Scalar, class Storage>
-dense_matrix<Scalar, Storage> mprod(dense_matrix<Scalar, Storage> const & lhs,
-    dense_matrix<Scalar, Storage> const & rhs) {
-  assert(lhs.dim2() == rhs.dim1());
-
-  typedef dense_matrix<Scalar, Storage> mat;
-
-  mat res{lhs.dim1(), rhs.dim2()};
-
-  details::mprod_inplace(lhs, rhs, res);
-  return res;
-}
-
-namespace details {
 template<
     template<class, class> class Mat1
     ,template<class, class> class Mat2
@@ -134,6 +115,20 @@ void mprod_inplace(Mat1<Scalar, Storage> const & lhs,
   }
 }
 } // namespace details
+
+template<class Scalar, class Storage>
+dense_matrix<Scalar, Storage> mprod(dense_matrix<Scalar, Storage> const & lhs,
+    dense_matrix<Scalar, Storage> const & rhs) {
+  assert(lhs.dim2() == rhs.dim1());
+
+  typedef dense_matrix<Scalar, Storage> mat;
+
+  mat res{lhs.dim1(), rhs.dim2()};
+
+  details::mprod_inplace(lhs, rhs, res);
+  return res;
+}
+
 
 
 typedef dense_matrix<double, std::vector<double>> dense_matrix_real;
