@@ -12,6 +12,7 @@
 #include "compressed_row_matrix.hpp"
 #include "conversions.hpp"
 #include "matrix_io.hpp"
+#include "decomposition.hpp"
 
 
 char const * const FILENAME = "test.mat";
@@ -41,6 +42,23 @@ void fill(Mat & matrix) {
       matrix(i, i + 1) = i;
     }
   }
+
+  matrix(0, 0) = 2;
+  matrix(0, 1) = 3;
+  matrix(0, 2) = 1;
+  matrix(0, 3) = 5;
+  matrix(1, 0) = 6;
+  matrix(1, 1) = 13;
+  matrix(1, 2) = 5;
+  matrix(1, 3) = 19;
+  matrix(2, 0) = 2;
+  matrix(2, 1) = 19;
+  matrix(2, 2) = 10;
+  matrix(2, 3) = 23;
+  matrix(3, 0) = 4;
+  matrix(3, 1) = 10;
+  matrix(3, 2) = 11;
+  matrix(3, 3) = 31;
 }
 
 template<class Vec>
@@ -70,10 +88,24 @@ void check_matrix(fe::la::dense_matrix<Scalar, Storage> const & m
   display_matrix(mvprod(row_v, cm));
 }
 
+template<template<class, class> class Mat, class Scalar, class Storage>
+void check_decomposition(fe::la::dense_matrix<Scalar, Storage> const & matrix) {
+  using namespace fe::la;
+
+  auto lu_matrix = convert_matrix<Mat>(matrix);
+  auto ldu_matrix = convert_matrix<Mat>(matrix);
+
+
+  std::cout << "Performing LU decomposition of matrix:\n";
+  fe::la::lu_decomposition(lu_matrix);
+  display_matrix(lu_matrix);
+}
+
 int main() {
   using namespace fe::la;
 
-  dense_matrix_real m{10, 10};
+  dense_matrix_real m{4, 4};
+
 
   std::cout << "Filling dense_matrix with some values...\n";
   fill(m);
@@ -81,6 +113,9 @@ int main() {
   std::cout << "We got:\n";
   display_matrix(m);
   std::cin.get();
+
+  check_decomposition<compressed_row_matrix>(m);
+  return 0;
 
   std::cout << "Saving dense_matrix to file...\n";
   {

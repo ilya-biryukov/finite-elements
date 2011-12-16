@@ -35,6 +35,14 @@ namespace fe { namespace la { namespace details {
 
         return *this;
       }
+
+	  	
+      sparse_element_proxy & operator /= (scalar_t value) {
+        if (value_ptr_) {
+          *value_ptr_ /= value;
+        }
+        return *this;
+      }
     private:
       Scalar * value_ptr_;
   };
