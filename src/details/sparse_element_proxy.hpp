@@ -36,7 +36,16 @@ namespace fe { namespace la { namespace details {
         return *this;
       }
 
-	  	
+      sparse_element_proxy & operator -= (scalar_t value) {
+        if (value_ptr_) {
+          *value_ptr_ -= value;
+        } else {
+          assert(value == 0);
+        }
+
+        return *this;
+      }
+
       sparse_element_proxy & operator /= (scalar_t value) {
         if (value_ptr_) {
           *value_ptr_ /= value;
