@@ -4,6 +4,7 @@
 #include <iterator>
 #include <string>
 #include <fstream>
+#include <functional>
 
 #include "dense_matrix.hpp"
 #include "dense_vector.hpp"
@@ -43,7 +44,7 @@ void fill(Mat & matrix) {
     }
   }
 
-  //example from Cormen Algorithms book 	
+  //example from Cormen Algorithms book
   matrix(0, 0) = 2;
   matrix(0, 1) = 3;
   matrix(0, 2) = 1;
@@ -70,9 +71,11 @@ void fill_vec(Vec & vec) {
 }
 
 template<template<class,class> class Mat, class Scalar, class Storage>
-void check_matrix(fe::la::dense_matrix<Scalar, Storage> const & m
-    ,fe::la::dense_vector<Scalar, Storage> const & col_v
-    ,fe::la::dense_vector<Scalar, Storage> const & row_v) {
+void check_matrix(
+    fe::la::dense_matrix<Scalar, Storage> const & m,
+    fe::la::dense_vector<Scalar, Storage> const & col_v,
+    fe::la::dense_vector<Scalar, Storage> const & row_v
+) {
   using namespace fe::la;
   std::cout << "Converting from dense_matrix...\n";
 
@@ -103,15 +106,17 @@ void fill_from_functor(Callable source, fe::la::dense_matrix<Scalar, Storage> & 
 //used to display matrix as LU all in one matrix
 //assuming that upper triangle is U matrix and lower triangle is L matrix, with ones on its diagonale
 template<template<class, class> class Mat, class Scalar, class Storage>
-void check_decomposition(fe::la::dense_matrix<Scalar, Storage> const & matrix) {
+void check_decomposition(
+    fe::la::dense_matrix<Scalar, Storage> const & matrix
+) {
   using namespace fe::la;
 
   auto lu_matrix = convert_matrix<Mat>(matrix);
   auto ldu_matrix = convert_matrix<Mat>(matrix);
 
   std::cout << "Performing LU decomposition of matrix:\n";
-  fe::la::lu_decomposition(lu_matrix);
   display_matrix(lu_matrix);
+  fe::la::sparse_lu_decomposition(lu_matrix);
   {
 	//lambda function to fill lower triangle matrix
     auto fill_l = [&lu_matrix](size_t i, size_t j)->Scalar {
@@ -123,7 +128,7 @@ void check_decomposition(fe::la::dense_matrix<Scalar, Storage> const & matrix) {
         return 0;
       }
     };
-	
+
 	//lambda function to fill upper triangle matrix
     auto fill_u = [&lu_matrix](size_t i, size_t j)->Scalar {
       if (i > j) {
@@ -151,8 +156,8 @@ void check_decomposition(fe::la::dense_matrix<Scalar, Storage> const & matrix) {
   std::cin.get();
 
   std::cout << "Performing LDU decomposition of matrix:\n";
-  fe::la::ldu_decomposition(ldu_matrix);
   display_matrix(ldu_matrix);
+  fe::la::sparse_ldu_decomposition(ldu_matrix);
   {
 	//lambda function to fill lower triangle matrix
     auto fill_l = [&ldu_matrix](size_t i, size_t j)->Scalar {
@@ -204,8 +209,8 @@ void check_decomposition(fe::la::dense_matrix<Scalar, Storage> const & matrix) {
     std::cout << "Their product is:\n";
     display_matrix(mprod(mprod(l, d), u));
   }
-
 }
+
 
 int main() {
   using namespace fe::la;
@@ -215,12 +220,13 @@ int main() {
 
   std::cout << "Filling dense_matrix with some values...\n";
   fill(m);
-	
+
   std::cout << "We got:\n";
   display_matrix(m);
   std::cin.get();
 
-  check_decomposition<dense_matrix>(m);
+  // check_decomposition<dense_matrix>(m);
+  check_decomposition<compressed_row_matrix>(m);
   return 0; //have to terminate here, do know that's not the best way to do so
 
   std::cout << "Saving dense_matrix to file...\n";
