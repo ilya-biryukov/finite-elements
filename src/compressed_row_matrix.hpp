@@ -81,7 +81,8 @@ namespace fe { namespace la {
           }
 
           void advance(
-              typename std::iterator_traits<RanIter>::difference_type n) {
+              typename std::iterator_traits<RanIter>::difference_type n
+          ) {
             std::advance(iter_, n);
             std::advance(index_iter_, n);
           }
