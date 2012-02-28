@@ -6,6 +6,6 @@ include (cmake/Modules/EnableCXX11.cmake)
 set (PPREF FE)
 
 enable_testing ()
-enable_cxx11 ()
+# enable_cxx11 ()
 
 add_subdirectory (src)
