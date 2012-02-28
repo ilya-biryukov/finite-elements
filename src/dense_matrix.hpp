@@ -6,6 +6,7 @@
 #include <utility>
 #include <algorithm>
 #include <complex>
+#include <iterator>
 
 namespace fe { namespace la {
 
@@ -123,7 +124,7 @@ dense_matrix<Scalar, Storage> mprod(dense_matrix<Scalar, Storage> const & lhs,
 
   typedef dense_matrix<Scalar, Storage> mat;
 
-  mat res{lhs.dim1(), rhs.dim2()};
+  mat res(lhs.dim1(), rhs.dim2());
 
   details::mprod_inplace(lhs, rhs, res);
   return res;
