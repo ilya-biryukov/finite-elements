@@ -1,5 +1,4 @@
-#ifndef BAND_MATRIX_HPP_
-#define BAND_MATRIX_HPP_
+#pragma once
 
 #include <cmath>
 #include <limits>
@@ -333,5 +332,3 @@ namespace fe { namespace la {
     };
   } // namespace details
 } } //namespace fe::la
-
-#endif /* BAND_MATRIX_HPP_ */

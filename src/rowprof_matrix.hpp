@@ -1,5 +1,4 @@
-  #ifndef ROWBLOCK_MATRIX_HPP_
-#define ROWBLOCK_MATRIX_HPP_
+#pragma once
 
 #include <vector>
 
@@ -235,5 +234,3 @@ namespace fe { namespace la {
   typedef rowprof_matrix<double, std::vector<double>> rowprof_matrix_real;
   typedef rowprof_matrix<std::complex<double>, std::vector<std::complex<double>>> rowprof_matrix_complex;
 } } // namespace fe::la
-
-#endif /* ROWBLOCK_MATRIX_HPP_ */

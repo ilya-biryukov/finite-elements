@@ -1,5 +1,4 @@
-#ifndef PRODUCTS_HPP_
-#define PRODUCTS_HPP_
+#pragma once
 
 #include "dense_vector.hpp"
 
@@ -66,5 +65,3 @@ namespace fe { namespace la {
   }
 
 } } // namespace fe::la
-
-#endif /* PRODUCTS_HPP_ */

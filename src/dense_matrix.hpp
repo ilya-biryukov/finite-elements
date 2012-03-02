@@ -1,5 +1,4 @@
-#ifndef DENSE_MATRIX_HPP_
-#define DENSE_MATRIX_HPP_
+#pragma once
 
 #include <cassert>
 #include <vector>
@@ -136,5 +135,3 @@ typedef dense_matrix<double, std::vector<double>> dense_matrix_real;
 typedef dense_matrix<std::complex<double>, std::vector<std::complex<double>>> dense_matrix_complex;
 
 } } // namespace fe::la
-
-#endif /* DENSE_MATRIX_HPP_ */

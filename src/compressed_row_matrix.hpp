@@ -1,5 +1,4 @@
-#ifndef COMPRESSED_ROW_MATRIX_HPP_
-#define COMPRESSED_ROW_MATRIX_HPP_
+#pragma once
 
 #include <vector>
 #include <algorithm>
@@ -232,5 +231,3 @@ namespace fe { namespace la {
   typedef compressed_row_matrix<double, std::vector<double>> compressed_row_matrix_real;
   typedef compressed_row_matrix<std::complex<double>, std::vector<std::complex<double>>> compressed_row_matrix_complex;
 } } // namespace fe::la
-
-#endif /* COMPRESSED_ROW_MATRIX_HPP_ */

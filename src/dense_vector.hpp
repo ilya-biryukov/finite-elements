@@ -1,5 +1,4 @@
-#ifndef DENSE_VECTOR_HPP_
-#define DENSE_VECTOR_HPP_
+#pragma once
 
 #include "dense_matrix.hpp"
 
@@ -89,5 +88,3 @@ dense_vector<Scalar, Storage> mvprod(dense_vector<Scalar, Storage> const & lhs, 
 }
 
 } } // namespace fe::la
-
-#endif /* DENSE_VECTOR_HPP_ */

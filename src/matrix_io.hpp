@@ -1,5 +1,4 @@
-#ifndef MATRIX_IO_HPP_
-#define MATRIX_IO_HPP_
+#pragma once
 
 #include <istream>
 #include <ostream>
@@ -44,8 +43,3 @@ namespace fe { namespace la { namespace io {
   }
 
 } } } // namespace fe::la::io
-
-
-
-
-#endif /* MATRIX_IO_HPP_ */

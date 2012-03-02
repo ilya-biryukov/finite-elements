@@ -1,5 +1,4 @@
-#ifndef DECOMPOSITION_HPP_
-#define DECOMPOSITION_HPP_
+#pragma once
 
 #include <cassert>
 
@@ -9,7 +8,7 @@ namespace fe { namespace la {
 
   template<class Mat>
   void sparse_lu_decomposition(Mat & mat) {
-	// benefit of using this method instead of lu_decomposition - 
+	// benefit of using this method instead of lu_decomposition -
 	// it makes O(n^2 * m) instead of O(n^3), where m - number of nun-zero elements
     assert(mat.dim1() == mat.dim2());
 
@@ -22,11 +21,11 @@ namespace fe { namespace la {
 
       for (size_t i = k + 1; i < n; ++i) {
         for (auto col_it = mat.nnrow_begin(i); col_it != mat.nnrow_end(i); ++col_it) {
-		  // run on the i row  until we reach k+1 element 	
+		  // run on the i row  until we reach k+1 element
           if (col_it.index() < k + 1) {
             continue;
           }
-		  // assign new value on the row using pointer of it's position	
+		  // assign new value on the row using pointer of it's position
           *col_it -= mat(i, k) * mat(k, col_it.index());
         }
       }
@@ -79,7 +78,7 @@ namespace fe { namespace la {
         for (auto col_it = mat.nnrow_begin(i); col_it != mat.nnrow_end(i); ++col_it) {
           if (col_it.index() < k + 1) {
             continue;
-          }	
+          }
           *col_it -= mat(i, k) * mat_kk * mat(k, col_it.index());
         }
       }
@@ -115,6 +114,3 @@ namespace fe { namespace la {
     }
   }
 } } // namespace fe::la
-
-
-#endif /* DECOMPOSITION_HPP_ */

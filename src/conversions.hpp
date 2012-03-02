@@ -1,5 +1,4 @@
-#ifndef CONVERSIONS_HPP_
-#define CONVERSIONS_HPP_
+#pragma once
 
 #include <algorithm>
 #include <utility>
@@ -139,5 +138,3 @@ namespace fe { namespace la {
   } // namespace details
 
 } } // namespace fe::la
-
-#endif /* CONVERSIONS_HPP_ */
